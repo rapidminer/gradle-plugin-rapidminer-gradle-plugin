@@ -1,2 +1,11 @@
-apply plugin: 'eclipse'
-apply plugin: 'java'
+buildscript {
+	dependencies {
+		classpath 'com.rapidminer.gradle:gradle-plugin:0.1.0-SNAPSHOT'
+	}
+}
+
+apply plugin: 'rapidminer-gradle-plugin'
+
+gradlePlugin {
+	id 'gradle-plugin'
+}
