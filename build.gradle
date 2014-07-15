@@ -1,6 +1,8 @@
 buildscript {
 	dependencies {
 		classpath 'com.rapidminer.gradle:gradle-plugin:0.1.0'
+		classpath 'com.rapidminer.gradle:release:0.1.1'
+		classpath 'com.rapidminer.gradle:publish:0.1.1'
 	}
 }
 
@@ -8,4 +10,9 @@ apply plugin: 'rapidminer-gradle-plugin'
 
 gradlePlugin {
 	id 'gradle-plugin'
+}
+
+dependencies {
+	compile 'com.rapidminer.gradle:release:0.1.1'
+	compile 'com.rapidminer.gradle:publish:0.1.1'
 }
