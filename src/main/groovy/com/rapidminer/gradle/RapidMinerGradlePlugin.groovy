@@ -44,7 +44,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			}
 			
 			release {
-				artifactoryPublish
+				releaseTasks << artifactoryPublish
 			}
 			
 			dependencies {
