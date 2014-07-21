@@ -41,6 +41,9 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				publications {
 					mavenJava(MavenPublication) {
 						from components.java
+						// the code below works because we are in the
+						// projects configure method. Otherwise we would have
+						// to use conventionalMappings
 						artifactId = extension.id
 					}
 				}
