@@ -19,9 +19,12 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			apply plugin: 'groovy'
 			apply plugin: 'rapidminer-publish'
 			apply plugin: 'rapidminer-release'
+			apply plugin: 'rapidminer-code-quality'
 
 			sourceCompatibility = 1.7
 			targetCompatibility = 1.7
+			
+			buildDir = 'target'
 			
 			group 'com.rapidminer.gradle'
 

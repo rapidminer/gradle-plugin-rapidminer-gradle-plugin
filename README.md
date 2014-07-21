@@ -23,6 +23,7 @@ It defines the correct source and target compatibility, sets the plugin group to
 - groovy
 - rapidminer-release 
 - rapidminer-publish
+- rapidminer-code-quality
  
 
 ## Added Tasks
