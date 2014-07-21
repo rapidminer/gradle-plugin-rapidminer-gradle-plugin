@@ -41,7 +41,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				publications {
 					mavenJava(MavenPublication) {
 						from components.java
-						artifactId { extension.id }
+						artifactId = { extension.id }
 					}
 				}
 			}
