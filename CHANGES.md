@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.2.1 - 0.2.3
+* Updating to the latest 'rapidminer-release' plugin
+
 #### 0.2.0
 * Adds rapidminer-code-quality as applied plugin
 * Changes default buildDir to 'target'
