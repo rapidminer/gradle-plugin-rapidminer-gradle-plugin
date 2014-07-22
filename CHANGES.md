@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.2.4
+* Updates 'rapidminer-code-quality' plugin to 0.2.1
+
 #### 0.2.1 - 0.2.3
 * Updating to the latest 'rapidminer-release' plugin
 
