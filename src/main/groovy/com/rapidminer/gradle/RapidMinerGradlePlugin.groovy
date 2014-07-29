@@ -15,27 +15,19 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 	@Override
 	public void apply(Project project) {
 		PluginConfiguration extension = project.extensions.create('gradlePlugin', PluginConfiguration)
-		
+
 		project.configure(project) {
 			apply plugin: 'groovy'
-			apply plugin: 'rapidminer-publish'
 			apply plugin: 'rapidminer-release'
 			apply plugin: 'rapidminer-code-quality'
+			apply plugin: 'maven-publish'
 
 			sourceCompatibility = JavaVersion.VERSION_1_7
 			targetCompatibility = JavaVersion.VERSION_1_7
-			
-			buildDir = 'target'
-			
-			group 'com.rapidminer.gradle'
 
-			// define publish repositories and publications to upload
-			uploadConfig {
-				releaseRepo 'libs-release-local'
-				snapshotRepo 'libs-snapshot-local'
-				contextUrl "${artifactory_contextUrl}"
-				publication 'mavenJava'
-			}
+			buildDir = 'target'
+
+			group 'com.rapidminer.gradle'
 
 			// define Maven publication
 			publishing {
@@ -48,12 +40,19 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 						artifactId = extension.id
 					}
 				}
+				repositories {
+					maven {
+						url "${artifactory_contextUrl}/${->project.version.contains('-SNAPSHOT') ?  'libs-snapshot-local' : 'libs-release-local'}"
+						credentials {
+							username = "${artifactory_user}"
+							password = "${artifactory_password}"
+						}
+					}
+				}
 			}
-			
-			release {
-				releaseTasks << artifactoryPublish
-			}
-			
+
+			release { releaseTasks = [build, publish] }
+
 			dependencies {
 				compile gradleApi()
 				compile localGroovy()
