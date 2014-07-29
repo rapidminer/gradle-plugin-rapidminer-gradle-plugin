@@ -1,12 +1,13 @@
 package com.rapidminer.gradle
 
+import org.gradle.api.JavaVersion;
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
 
 /**
  * 
- * @author nwoehler
+ * @author Nils Woehler
  *
  */
 class RapidMinerGradlePlugin implements Plugin<Project> {
@@ -21,8 +22,8 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			apply plugin: 'rapidminer-release'
 			apply plugin: 'rapidminer-code-quality'
 
-			sourceCompatibility = 1.7
-			targetCompatibility = 1.7
+			sourceCompatibility = JavaVersion.VERSION_1_7
+			targetCompatibility = JavaVersion.VERSION_1_7
 			
 			buildDir = 'target'
 			
