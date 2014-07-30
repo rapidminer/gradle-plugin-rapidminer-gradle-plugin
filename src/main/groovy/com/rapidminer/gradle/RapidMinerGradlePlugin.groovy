@@ -55,7 +55,6 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 
 			dependencies {
 				compile gradleApi()
-				compile localGroovy()
 			}
 		}
 	}
