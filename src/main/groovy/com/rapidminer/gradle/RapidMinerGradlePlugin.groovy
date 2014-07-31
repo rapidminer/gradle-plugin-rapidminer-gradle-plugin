@@ -66,10 +66,29 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				}
 			}
 
-			release { releaseTasks = [build, publish] }
+			release { 
+				releaseRepositoryUrl = "${artifactory_contextUrl}/libs-release-local"
+				snapshotRepositoryUrl= "${artifactory_contextUrl}/libs-snapshot-local"
+				releaseTasks = [build, publish] 
+			}
 
 			dependencies {
 				compile gradleApi()
+				
+				// testing
+				testCompile 'junit:junit:4.11'
+				testCompile('org.spockframework:spock-core:0.7-groovy-2.0') { exclude group: 'org.codehaus.groovy' }
+				
+				// Adds TemoDirectory annotation
+				testCompile('com.energizedwork:spock-extensions:1.0')  {
+					exclude group: 'org.codehaus.groovy'
+					exclude group: 'org.spockframework'
+				}
+				
+				testCompile('com.netflix.nebula:nebula-test:1.12.0') {
+					exclude group: 'org.codehaus.groovy'
+					exclude group: 'org.spockframework'
+				}
 			}
 		}
 	}
