@@ -43,6 +43,11 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			buildDir = 'target'
 
 			group 'com.rapidminer.gradle'
+			
+			def maxForks = Runtime.runtime.availableProcessors() -1
+			tasks.withType(org.gradle.api.tasks.testing.Test) {
+				maxParallelForks = maxForks
+			}
 
 			// define Maven publication
 			publishing {
@@ -79,7 +84,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				testCompile 'junit:junit:4.11'
 				testCompile('org.spockframework:spock-core:0.7-groovy-2.0') { exclude group: 'org.codehaus.groovy' }
 				
-				// Adds TemoDirectory annotation
+				// Adds TempDirectory annotation
 				testCompile('com.energizedwork:spock-extensions:1.0')  {
 					exclude group: 'org.codehaus.groovy'
 					exclude group: 'org.spockframework'
