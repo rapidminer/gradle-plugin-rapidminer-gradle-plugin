@@ -48,12 +48,11 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			tasks.withType(org.gradle.api.tasks.testing.Test) { maxParallelForks = maxForks }
 
 			// ensure that each Jenkins build sees updated test results (fails otherwise)
-			tasks.create(name: 'updateTestTimestamps') {
-				inputs.files test.outputs.files
-				doLast{
-					def timestamp = System.currentTimeMillis()
-					if(test.hasProperty('testResultsDir')){
-						test.testResultsDir?.eachFile { it.lastModified = timestamp }
+			tasks.create(name: 'updateTestTimestamps') << {
+				def timestamp = System.currentTimeMillis()
+				test.outputs.files.each { File output ->
+					output.eachFile { File f ->
+						f.lastModified = timestamp
 					}
 				}
 			}
