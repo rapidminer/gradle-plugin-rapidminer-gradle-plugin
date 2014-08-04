@@ -15,13 +15,13 @@
  */
 package com.rapidminer.gradle
 
-import org.gradle.api.JavaVersion;
+import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
 
 /**
- * 
+ *
  * @author Nils Woehler
  *
  */
@@ -43,11 +43,21 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			buildDir = 'target'
 
 			group 'com.rapidminer.gradle'
-			
+
 			def maxForks = Runtime.runtime.availableProcessors() -1
-			tasks.withType(org.gradle.api.tasks.testing.Test) {
-				maxParallelForks = maxForks
+			tasks.withType(org.gradle.api.tasks.testing.Test) { maxParallelForks = maxForks }
+
+			// ensure that each Jenkins build sees updated test results (fails otherwise)
+			tasks.create(name: 'updateTestTimestamps') {
+				inputs.files test.outputs.files
+				doLast{
+					def timestamp = System.currentTimeMillis()
+					if(test.hasProperty('testResultsDir')){
+						test.testResultsDir?.eachFile { it.lastModified = timestamp }
+					}
+				}
 			}
+			check.dependsOn(updateTestTimestamps)
 
 			// define Maven publication
 			publishing {
@@ -71,25 +81,25 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				}
 			}
 
-			release { 
+			release {
 				releaseRepositoryUrl = "${artifactory_contextUrl}/libs-release-local"
 				snapshotRepositoryUrl= "${artifactory_contextUrl}/libs-snapshot-local"
-				releaseTasks = [build, publish] 
+				releaseTasks = [build, publish]
 			}
 
 			dependencies {
 				compile gradleApi()
-				
+
 				// testing
 				testCompile 'junit:junit:4.11'
 				testCompile('org.spockframework:spock-core:0.7-groovy-2.0') { exclude group: 'org.codehaus.groovy' }
-				
+
 				// Adds TempDirectory annotation
 				testCompile('com.energizedwork:spock-extensions:1.0')  {
 					exclude group: 'org.codehaus.groovy'
 					exclude group: 'org.spockframework'
 				}
-				
+
 				testCompile('com.netflix.nebula:nebula-test:1.12.0') {
 					exclude group: 'org.codehaus.groovy'
 					exclude group: 'org.spockframework'
