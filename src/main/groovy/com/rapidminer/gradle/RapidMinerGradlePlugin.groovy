@@ -33,8 +33,8 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 
 		project.configure(project) {
 			apply plugin: 'groovy'
-			apply plugin: 'rapidminer-release'
-			apply plugin: 'rapidminer-code-quality'
+			apply plugin: 'com.rapidminer.gradle.release'
+			apply plugin: 'com.rapidminer.gradle.code-quality'
 			apply plugin: 'maven-publish'
 
 			sourceCompatibility = JavaVersion.VERSION_1_7
