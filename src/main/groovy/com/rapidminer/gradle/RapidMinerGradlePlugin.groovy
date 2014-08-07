@@ -51,8 +51,13 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			tasks.create(name: 'updateTestTimestamps') << {
 				def timestamp = System.currentTimeMillis()
 				test.outputs.files.each { File output ->
-					output.eachFile { File f ->
-						f.lastModified = timestamp
+					if(output.exists()) {
+						output.lastModified = timestamp
+						if(output.isDirectory()){
+							output.eachFile { File f ->
+								f.lastModified = timestamp
+							}
+						}
 					}
 				}
 			}
@@ -71,7 +76,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				}
 				repositories {
 					maven {
-						url "${artifactory_contextUrl}/${->project.version.contains('-SNAPSHOT') ?  'libs-snapshot-local' : 'libs-release-local'}"
+						url "${artifactory_contextUrl}${->project.version.contains('-SNAPSHOT') ?  'libs-snapshot-local' : 'libs-release-local'}"
 						credentials {
 							username = "${artifactory_user}"
 							password = "${artifactory_password}"
