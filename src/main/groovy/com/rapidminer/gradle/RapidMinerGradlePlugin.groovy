@@ -40,8 +40,6 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			sourceCompatibility = JavaVersion.VERSION_1_7
 			targetCompatibility = JavaVersion.VERSION_1_7
 
-			buildDir = 'target'
-
 			group 'com.rapidminer.gradle'
 
 			def maxForks = Runtime.runtime.availableProcessors() -1
