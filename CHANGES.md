@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.2.5
+* Does not set max parallel forks for testing anymore
+
 #### 0.2.4
 * Updates 'rapidminer-release' plugin to version 0.2.0
 * Replaces 'rapidminer-publish' plugin by 'maven-publish' plugin

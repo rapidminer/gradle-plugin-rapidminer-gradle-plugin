@@ -42,9 +42,6 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 
 			group 'com.rapidminer.gradle'
 
-			def maxForks = Runtime.runtime.availableProcessors() -1
-			tasks.withType(org.gradle.api.tasks.testing.Test) { maxParallelForks = maxForks }
-
 			// ensure that each Jenkins build sees updated test results (fails otherwise)
 			tasks.create(name: 'updateTestTimestamps') << {
 				def timestamp = System.currentTimeMillis()
