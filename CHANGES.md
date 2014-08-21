@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.2.6
+* Adds Gradle 2.1 compatible plugin name 'com.rapidminer.gradle.gradle-plugin'
+
 #### 0.2.5
 * Does not set max parallel forks for testing anymore
 

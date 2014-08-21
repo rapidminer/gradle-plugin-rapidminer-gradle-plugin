@@ -9,7 +9,7 @@ It defines the correct source and target compatibility, sets the plugin group to
 		}
 	}
 	
-	apply plugin: 'rapidminer-gradle-plugin'
+	apply plugin: 'com.rapidminer.gradle.gradle-plugin'
 	
 	gradlePlugin {
 		
