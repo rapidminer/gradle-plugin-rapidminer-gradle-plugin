@@ -61,7 +61,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			// define Maven publication
 			publishing {
 				publications {
-					mavenJava(MavenPublication) {
+					plugin(MavenPublication) {
 						from components.java
 						// the code below works because we are in the
 						// projects configure method. Otherwise we would have

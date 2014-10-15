@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.2.7
+* Rename of mavenJava publication to plugin publication
+
 #### 0.2.6
 * Adds Gradle 2.1 compatible plugin name 'com.rapidminer.gradle.gradle-plugin'
 
