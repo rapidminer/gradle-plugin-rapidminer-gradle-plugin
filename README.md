@@ -21,9 +21,10 @@ It defines the correct source and target compatibility, sets the plugin group to
 	
 ## Applied Plugins
 - groovy
-- rapidminer-release 
-- rapidminer-code-quality
- - maven-publish
+- maven-publish
+- com.rapidminer.gradle.release
+- com.rapidminer.gradle.code-quality
+- com.jfrog.bintray
 
 ## Added Tasks
 _Adds no tasks_

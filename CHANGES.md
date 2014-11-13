@@ -2,6 +2,8 @@
 
 #### 0.2.7
 * Rename of mavenJava publication to plugin publication
+* Adds sources jar to plugin publication 
+* Adds Bintray plugin
 
 #### 0.2.6
 * Adds Gradle 2.1 compatible plugin name 'com.rapidminer.gradle.gradle-plugin'

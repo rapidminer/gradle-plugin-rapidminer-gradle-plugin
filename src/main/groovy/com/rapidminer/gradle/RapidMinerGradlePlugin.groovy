@@ -19,6 +19,7 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.bundling.Jar
 
 /**
  *
@@ -36,11 +37,23 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			apply plugin: 'com.rapidminer.gradle.release'
 			apply plugin: 'com.rapidminer.gradle.code-quality'
 			apply plugin: 'maven-publish'
+			apply plugin: 'com.jfrog.bintray'
 
 			sourceCompatibility = JavaVersion.VERSION_1_7
 			targetCompatibility = JavaVersion.VERSION_1_7
 
 			group 'com.rapidminer.gradle'
+			
+			// custom tasks for creating source/javadoc jars
+			tasks.create(name:'sourcesJar', type: Jar, dependsOn: 'classes') {
+				classifier = 'sources'
+				from sourceSets.main.allSource
+			}
+		
+			// add source jar tasks as artifacts
+			artifacts {
+				archives sourcesJar
+			}
 
 			// ensure that each Jenkins build sees updated test results (fails otherwise)
 			tasks.create(name: 'updateTestTimestamps') << {
@@ -67,6 +80,10 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 						// projects configure method. Otherwise we would have
 						// to use conventionalMappings
 						artifactId = extension.id
+						
+						artifact sourcesJar {
+							classifier "sources"
+						}
 					}
 				}
 				repositories {
@@ -102,6 +119,18 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				testCompile('com.netflix.nebula:nebula-test:1.12.0') {
 					exclude group: 'org.codehaus.groovy'
 					exclude group: 'org.spockframework'
+				}
+			}
+			
+			bintray {
+				user = bintrayUser //this comes form gradle.properties file in ~/.gradle
+				key = bintrayKey //this comes form gradle.properties file in ~/.gradle
+				publications = ['mavenJava']
+				pkg { //package will be created if does not exist
+					repo = 'open-source'
+					userOrg = 'rapidminer'
+					name = "gradle-plugin-${->extension.id}"
+					licenses = ['Apache-2.0']
 				}
 			}
 		}
