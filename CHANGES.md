@@ -1,6 +1,8 @@
 ## Change Log
 
 #### 0.2.8
+* Adds bintrayUpload to release tasks
+* Fixes publication referenced by bintrayUpload task
 
 #### 0.2.7
 * Adds sources jar to plugin publication 
