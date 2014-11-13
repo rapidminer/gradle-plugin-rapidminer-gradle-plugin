@@ -100,7 +100,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			release {
 				releaseRepositoryUrl = "${artifactory_contextUrl}/libs-release-local"
 				snapshotRepositoryUrl= "${artifactory_contextUrl}/libs-snapshot-local"
-				releaseTasks = [build, publish]
+				releaseTasks = [build, publishPluginPublicationToMavenRepository, bintrayUpload]
 			}
 
 			dependencies {
@@ -122,16 +122,21 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				}
 			}
 			
-			bintray {
-				user = bintrayUser //this comes form gradle.properties file in ~/.gradle
-				key = bintrayKey //this comes form gradle.properties file in ~/.gradle
-				publications = ['mavenJava']
-				pkg { //package will be created if does not exist
-					repo = 'open-source'
-					userOrg = 'rapidminer'
-					name = "gradle-plugin-${->extension.id}"
-					licenses = ['Apache-2.0']
+			afterEvaluate {
+				// Needs to be done in afterEvaluate as we need access to the configured 'gradlePlugin' extension
+				bintray {
+					user = bintrayUser //this comes form gradle.properties file in ~/.gradle
+							key = bintrayKey //this comes form gradle.properties file in ~/.gradle
+							publications = ['plugin']
+									publish = true
+									pkg { //package will be created if does not exist
+						repo = 'open-source'
+								userOrg = 'rapidminer'
+								name = "gradle-plugin-rapidminer-${->extension.id}"
+								licenses = ['Apache-2.0']
+					}
 				}
+				
 			}
 		}
 	}
