@@ -97,12 +97,6 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				}
 			}
 
-			release {
-				releaseRepositoryUrl = "${artifactory_contextUrl}/libs-release-local"
-				snapshotRepositoryUrl= "${artifactory_contextUrl}/libs-snapshot-local"
-				releaseTasks = [build, publishPluginPublicationToMavenRepository, bintrayUpload]
-			}
-
 			dependencies {
 				compile gradleApi()
 
@@ -135,6 +129,13 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 								name = "gradle-plugin-rapidminer-${->extension.id}"
 								licenses = ['Apache-2.0']
 					}
+				}
+				
+				// Needs to be done in afterEvaluate as release tasks aren't available before yet
+				release {
+					releaseRepositoryUrl = "${artifactory_contextUrl}/libs-release-local"
+					snapshotRepositoryUrl= "${artifactory_contextUrl}/libs-snapshot-local"
+					releaseTasks = [build, publishPluginPublicationToMavenRepository, bintrayUpload]
 				}
 				
 			}
