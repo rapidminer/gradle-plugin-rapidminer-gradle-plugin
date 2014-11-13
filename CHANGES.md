@@ -1,5 +1,7 @@
 ## Change Log
 
+#### 0.2.8
+
 #### 0.2.7
 * Adds sources jar to plugin publication 
 * Adds Bintray plugin
