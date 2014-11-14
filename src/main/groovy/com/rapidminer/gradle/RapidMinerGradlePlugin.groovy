@@ -86,12 +86,17 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 						}
 					}
 				}
-				repositories {
-					maven {
-						url "${artifactory_contextUrl}${->project.version.contains('-SNAPSHOT') ?  'libs-snapshot-local' : 'libs-release-local'}"
-						credentials {
-							username = "${artifactory_user}"
-							password = "${artifactory_password}"
+				// Only set remote Maven repository if user, password, and contextURL are set
+				if(project.hasProperty('artifactory_user') && 
+					project.hasProperty('artifactory_password') && 
+					project.hasProperty('artifactory_contextUrl')) {
+					repositories {
+						maven {
+							url "${artifactory_contextUrl}${->project.version.contains('-SNAPSHOT') ?  'libs-snapshot-local' : 'libs-release-local'}"
+							credentials {
+								username = "${artifactory_user}"
+								password = "${artifactory_password}"
+							}
 						}
 					}
 				}

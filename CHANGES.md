@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.2.10
+* Only configure remote repository if contextURL, user, and password are set
+
 #### 0.2.9
 * Adds shortened plugin name 'com.rapidminer.gradle-plugin' to comply with plugins.gradle.org portal standards
 
