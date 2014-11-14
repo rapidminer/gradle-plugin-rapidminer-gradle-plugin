@@ -120,14 +120,17 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				// Needs to be done in afterEvaluate as we need access to the configured 'gradlePlugin' extension
 				bintray {
 					user = bintrayUser //this comes form gradle.properties file in ~/.gradle
-							key = bintrayKey //this comes form gradle.properties file in ~/.gradle
-							publications = ['plugin']
-									publish = true
-									pkg { //package will be created if does not exist
+					key = bintrayKey //this comes form gradle.properties file in ~/.gradle
+					publications = ['plugin']
+					publish = true
+					pkg { //package will be created if does not exist
 						repo = 'open-source'
-								userOrg = 'rapidminer'
-								name = "gradle-plugin-rapidminer-${->extension.id}"
-								licenses = ['Apache-2.0']
+						userOrg = 'rapidminer'
+						name = "gradle-plugin-rapidminer-${->extension.id}"
+						licenses = ['Apache-2.0']
+						version {
+							attributes = [ 'gradle-plugin': "com.rapidminer.${->extension.id}:com.rapidminer.gradle:${->extension.id}" ]
+						}
 					}
 				}
 				
