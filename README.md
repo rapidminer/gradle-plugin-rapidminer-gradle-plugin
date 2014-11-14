@@ -1,20 +1,16 @@
 ## Introduction
-The 'rapidminer-gradle-plugin' is a meta plugin which bundles configuration for all RapidMiner Gradle plugins.
-It defines the correct source and target compatibility, sets the plugin group to 'com.rapidminer.gradle' and configures the release and upload tasks.
+The 'com.rapidminer.gradle-plugin' is a meta plugin which bundles configuration for all RapidMiner Gradle plugins.
+It defines the correct source and target Java/Groovy compatibility, sets the plugin group to 'com.rapidminer.gradle' and configures the release and upload tasks.
 
-## How to use
-	buildscript {
-		dependencies {
-			classpath 'com.rapidminer.gradle:gradle-plugin:$VERSION'
-		}
+## How to use (requires Gradle 2.1+)
+	plugins {
+		id 'com.rapidminer.gradle-plugin' version «plugin version»
 	}
-	
-	apply plugin: 'com.rapidminer.gradle.gradle-plugin'
 	
 	gradlePlugin {
 		
 		/*
-		 * The ID of the plugin which will be used as artifactId when being published to Artifactory. 
+		 * The ID of the plugin which will be used as artifactId when being published to Artifactory/Bintray. 
 		 */
 		id 'gradle-plugin'
 	} 
@@ -22,8 +18,8 @@ It defines the correct source and target compatibility, sets the plugin group to
 ## Applied Plugins
 - groovy
 - maven-publish
-- com.rapidminer.gradle.release
-- com.rapidminer.gradle.code-quality
+- com.rapidminer.release
+- com.rapidminer.code-quality
 - com.jfrog.bintray
 
 ## Added Tasks

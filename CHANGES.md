@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.2.9
+* Adds shortened plugin name 'com.rapidminer.gradle-plugin' to comply with plugins.gradle.org portal standards
+
 #### 0.2.8
 * Adds bintrayUpload to release tasks
 * Fixes publication referenced by bintrayUpload task
