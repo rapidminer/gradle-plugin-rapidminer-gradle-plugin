@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.2.11
+* 
+
 #### 0.2.10
 * Only configure remote repository if contextURL, user, and password are set
 * Fixes missing property exception in case publishing to Maven repository task is not configured yet
