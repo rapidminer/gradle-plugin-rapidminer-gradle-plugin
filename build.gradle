@@ -9,5 +9,5 @@ gradlePlugin {
 dependencies {
 	compile 'com.rapidminer.gradle:release:0.2.1'
 	compile 'com.rapidminer.gradle:code-quality:0.3.6'
-	compile 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.1'
+	compile 'com.gradle.publish:plugin-publish-plugin:0.9.0'
 }

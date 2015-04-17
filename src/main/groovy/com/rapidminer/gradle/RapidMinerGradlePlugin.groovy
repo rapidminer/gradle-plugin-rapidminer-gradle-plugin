@@ -24,6 +24,8 @@ import org.gradle.api.tasks.bundling.Jar
 
 /**
  *
+ * The Plugin class which configures the project as a Gradle plugin project.
+ *
  * @author Nils Woehler
  *
  */
@@ -35,10 +37,10 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 
 		project.configure(project) {
 			apply plugin: 'groovy'
+			apply plugin: 'maven-publish'
 			apply plugin: 'com.rapidminer.release'
 			apply plugin: 'com.rapidminer.code-quality'
-			apply plugin: 'maven-publish'
-			apply plugin: 'com.jfrog.bintray'
+			apply plugin: 'com.gradle.plugin-publish'
 
 			sourceCompatibility = JavaVersion.VERSION_1_7
 			targetCompatibility = JavaVersion.VERSION_1_7
@@ -52,9 +54,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			}
 		
 			// add source jar tasks as artifacts
-			artifacts {
-				archives sourcesJar
-			}
+			artifacts { archives sourcesJar }
 
 			// ensure that each Jenkins build sees updated test results (fails otherwise)
 			tasks.create(name: 'updateTestTimestamps') << {
@@ -108,6 +108,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 
 			dependencies {
 				compile gradleApi()
+				compile localGroovy()
 
 				// testing
 				testCompile 'junit:junit:4.11'
@@ -125,24 +126,32 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				}
 			}
 
+			// All code below needs to be executed in afterEvaluate as we need access to the configured 'gradlePlugin' extension
 			afterEvaluate {
-				// Needs to be done in afterEvaluate as we need access to the configured 'gradlePlugin' extension
-				bintray {
-					user = bintrayUser //this comes form gradle.properties file in ~/.gradle
-					key = bintrayKey //this comes form gradle.properties file in ~/.gradle
-					publications = ['plugin']
-					publish = true
-					pkg { //package will be created if does not exist
-						repo = 'open-source'
-						userOrg = 'rapidminer'
-						name = "gradle-plugin-rapidminer-${->extension.id}"
-						licenses = ['Apache-2.0']
-						version {
-							attributes = [ 'gradle-plugin': "com.rapidminer.${->extension.id}:com.rapidminer.gradle:${->extension.id}" ]
+				if(!extension.description){
+					throw new RuntimeException('Missing extension description!')
+				}
+				if(!extension.displayName){
+					throw new RuntimeException('Missing display name!')
+				}
+
+				pluginBundle {
+					website = 'https://www.rapidminer.com'
+					vcsUrl = "https://github.com/gradle/gradle-plugin-rapidminer-${extension.id}"
+					tags = ['rapidminer']
+					description = extension.description
+
+					// add all custom tags as well
+					extension.tags.each { tag -> tags << tag }
+
+					plugins {
+						rapidminerPlugin {
+							id = "org.rapidminer.${extension.id}"
+							displayName = extension.displayName
 						}
 					}
 				}
-				
+
 				// Needs to be done in afterEvaluate as release tasks aren't available before yet
 				release {
 					releaseRepositoryUrl = "${artifactory_contextUrl}/libs-release-local"
@@ -159,10 +168,6 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 								releaseTasks << tasks.publishPluginPublicationToMavenRepository
 							}
 						}
-					}
-
-					if(tasks.findByName('bintrayUpload')){
-						releaseTasks << tasks.bintrayUpload
 					}
 				}
 				

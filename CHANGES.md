@@ -1,7 +1,8 @@
 ## Change Log
 
-#### 0.2.11
-* 
+#### 0.3.0
+* Changes plugin release mechanism from Bintray to new 'com.gradle.plugin-publish' plugin
+* Removes deprecated plugin properties files
 
 #### 0.2.10
 * Only configure remote repository if contextURL, user, and password are set

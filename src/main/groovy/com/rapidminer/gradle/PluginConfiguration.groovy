@@ -16,10 +16,14 @@
 package com.rapidminer.gradle;
 
 /**
+ * The plugin configuration contains information about the Gradle plugin (e.g. the ID).
  *
  * @author Nils Woehler
  *
  */
 public class PluginConfiguration {
 	String id
+	String description
+	String displayName
+	def tags = []
 }
