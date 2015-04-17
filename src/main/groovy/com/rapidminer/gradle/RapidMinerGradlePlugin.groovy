@@ -18,6 +18,7 @@ package com.rapidminer.gradle
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
 
@@ -34,8 +35,8 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 
 		project.configure(project) {
 			apply plugin: 'groovy'
-			apply plugin: 'com.rapidminer.gradle.release'
-			apply plugin: 'com.rapidminer.gradle.code-quality'
+			apply plugin: 'com.rapidminer.release'
+			apply plugin: 'com.rapidminer.code-quality'
 			apply plugin: 'maven-publish'
 			apply plugin: 'com.jfrog.bintray'
 
@@ -90,6 +91,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				if(project.hasProperty('artifactory_user') && 
 					project.hasProperty('artifactory_password') && 
 					project.hasProperty('artifactory_contextUrl')) {
+					logger.info 'Found Artifactory properties. Applying remote repository publishing configuration.'
 					repositories {
 						maven {
 							url "${artifactory_contextUrl}${->project.version.contains('-SNAPSHOT') ?  'libs-snapshot-local' : 'libs-release-local'}"
@@ -99,6 +101,8 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 							}
 						}
 					}
+				} else {
+					logger.info 'Not applying remote repository publishing configuration as Artifactory repository is not configured properly.'
 				}
 			}
 
@@ -120,7 +124,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 					exclude group: 'org.spockframework'
 				}
 			}
-			
+
 			afterEvaluate {
 				// Needs to be done in afterEvaluate as we need access to the configured 'gradlePlugin' extension
 				bintray {
@@ -143,7 +147,23 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				release {
 					releaseRepositoryUrl = "${artifactory_contextUrl}/libs-release-local"
 					snapshotRepositoryUrl= "${artifactory_contextUrl}/libs-snapshot-local"
-					releaseTasks = [build, publishPluginPublicationToMavenRepository, bintrayUpload]
+
+					// Configure release tasks
+					releaseTasks << build
+
+					if(tasks.findByName('publishPluginPublicationToMavenRepository')){
+						releaseTasks << tasks.publishPluginPublicationToMavenRepository
+					} else {
+						tasks.whenTaskAdded { Task task ->
+							if(task.name == 'publishPluginPublicationToMavenRepository') {
+								releaseTasks << tasks.publishPluginPublicationToMavenRepository
+							}
+						}
+					}
+
+					if(tasks.findByName('bintrayUpload')){
+						releaseTasks << tasks.bintrayUpload
+					}
 				}
 				
 			}
