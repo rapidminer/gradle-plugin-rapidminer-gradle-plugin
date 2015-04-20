@@ -128,18 +128,11 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 
 			// All code below needs to be executed in afterEvaluate as we need access to the configured 'gradlePlugin' extension
 			afterEvaluate {
-				if(!extension.description){
-					throw new RuntimeException('Missing extension description!')
-				}
-				if(!extension.displayName){
-					throw new RuntimeException('Missing display name!')
-				}
-
 				pluginBundle {
 					website = 'https://www.rapidminer.com'
 					vcsUrl = "https://github.com/gradle/gradle-plugin-rapidminer-${extension.id}"
 					tags = ['rapidminer']
-					description = extension.description
+					description = readChangesDescription(project)
 
 					// add all custom tags as well
 					extension.tags.each { tag -> tags << tag }
@@ -147,7 +140,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 					plugins {
 						rapidminerPlugin {
 							id = "com.rapidminer.${extension.id}"
-							displayName = extension.displayName
+							displayName = "com.rapidminer.${extension.id}"
 						}
 					}
 				}
@@ -173,6 +166,44 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				
 			}
 		}
+	}
+
+	def String readChangesDescription(project){
+		File changesFile = project.file('CHANGES.md')
+		if(!changesFile.exists()){
+			project.logger.info 'Changes file does not exists. Returning empty changes description.'
+			return '-'
+		}
+
+		// Load changes text and find latest version changes start
+		String changesText = changesFile.text
+		int firstVersionIndex = changesText.indexOf('####')
+		if(firstVersionIndex == -1){
+			project.logger.info 'Could not find latest changes definition starting with "####". ' +
+					'Returning empty changes description.'
+			return '-'
+		} else {
+			firstVersionIndex += 4
+		}
+
+		// find last release version changes start
+		int nextVersionIndex = changesText.substring(firstVersionIndex).indexOf('####')
+		if(nextVersionIndex == -1){
+			project.logger.info 'Could not find changes definition of last release version starting with' +
+					' "####". Returning empty changes description.'
+			return '-'
+		}
+
+		// Cut full changes text to latest version changes and extract changes entries
+		String latestVersionChangesText = changesText.substring(firstVersionIndex, firstVersionIndex + nextVersionIndex).trim()
+		int firstChangesEntryIndex = latestVersionChangesText.indexOf('*')
+		if(firstChangesEntryIndex == -1){
+			project.logger.info 'Could not find first changes entry starting with "*". Returning empty changes description.'
+			return '-'
+		} else {
+			return latestVersionChangesText.substring(firstChangesEntryIndex)
+		}
+
 	}
 
 }

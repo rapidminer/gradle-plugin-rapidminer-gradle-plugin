@@ -1,5 +1,9 @@
 ## Change Log
 
+#### 0.3.1
+* Removes description and displayName 'gradlePlugin' properties
+* Read latest changes from CHANGES.md when publishing new plugin version to https://plugins.gradle.org/
+
 #### 0.3.0
 * Changes plugin publishing mechanism from Bintray to new 'com.gradle.plugin-publish' plugin
 * Removes deprecated plugin properties files
