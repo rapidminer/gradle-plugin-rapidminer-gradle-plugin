@@ -146,7 +146,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 
 					plugins {
 						rapidminerPlugin {
-							id = "org.rapidminer.${extension.id}"
+							id = "com.rapidminer.${extension.id}"
 							displayName = extension.displayName
 						}
 					}

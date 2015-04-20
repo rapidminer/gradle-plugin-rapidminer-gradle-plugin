@@ -8,6 +8,7 @@ apply plugin: 'com.rapidminer.gradle-plugin'
 
 gradlePlugin {
 	id 'gradle-plugin'
+	displayName 'com.rapidminer.gradle-plugin'
 	description 'The \'com.rapidminer.gradle-plugin\' is a meta plugin which bundles configuration for all RapidMiner Gradle plugins.'
 }
 
