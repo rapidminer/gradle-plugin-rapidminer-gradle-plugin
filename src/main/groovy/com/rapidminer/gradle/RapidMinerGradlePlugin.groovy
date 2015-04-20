@@ -131,6 +131,9 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				if(!extension.description){
 					throw new RuntimeException('Missing extension description!')
 				}
+				if(!extension.displayName){
+					throw new RuntimeException('Missing display name!')
+				}
 
 				pluginBundle {
 					website = 'https://www.rapidminer.com'
@@ -144,6 +147,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 					plugins {
 						rapidminerPlugin {
 							id = "org.rapidminer.${extension.id}"
+							displayName = extension.displayName
 						}
 					}
 				}

@@ -24,5 +24,6 @@ package com.rapidminer.gradle;
 public class PluginConfiguration {
 	String id
 	String description
+	String displayName
 	def tags = []
 }
