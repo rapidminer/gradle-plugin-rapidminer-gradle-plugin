@@ -110,19 +110,8 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				compile gradleApi()
 				compile localGroovy()
 
-				// testing
-				testCompile 'junit:junit:4.11'
-				testCompile('org.spockframework:spock-core:0.7-groovy-2.0') { exclude group: 'org.codehaus.groovy' }
-
-				// Adds TempDirectory annotation
-				testCompile('com.energizedwork:spock-extensions:1.0')  {
+				testCompile('com.netflix.nebula:nebula-test:2.2.1') {
 					exclude group: 'org.codehaus.groovy'
-					exclude group: 'org.spockframework'
-				}
-
-				testCompile('com.netflix.nebula:nebula-test:1.12.0') {
-					exclude group: 'org.codehaus.groovy'
-					exclude group: 'org.spockframework'
 				}
 			}
 

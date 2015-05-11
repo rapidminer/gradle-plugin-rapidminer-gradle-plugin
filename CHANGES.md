@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.3.2
+* Increases nebula-test dependency to version 2.2.1
+
 #### 0.3.1
 * Removes description and displayName 'gradlePlugin' properties
 * Read latest changes from CHANGES.md when publishing new plugin version to https://plugins.gradle.org/
