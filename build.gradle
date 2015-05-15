@@ -1,10 +1,6 @@
-buildscript {
-	dependencies {
-		classpath 'com.rapidminer.gradle:gradle-plugin:0.3.+'
-	}
+plugins {
+    id 'com.rapidminer.gradle-plugin' version '0.3.3'
 }
-
-apply plugin: 'com.rapidminer.gradle-plugin'
 
 gradlePlugin {
 	id 'gradle-plugin'

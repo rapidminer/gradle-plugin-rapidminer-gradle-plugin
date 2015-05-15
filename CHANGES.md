@@ -1,5 +1,7 @@
 ## Change Log
 
+#### 0.3.4
+
 #### 0.3.3
 * Updates Maven repo URL for new Nexus Maven repo
 
