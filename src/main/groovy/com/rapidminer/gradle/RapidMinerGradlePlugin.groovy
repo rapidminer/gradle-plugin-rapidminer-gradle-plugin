@@ -88,21 +88,21 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 					}
 				}
 				// Only set remote Maven repository if user, password, and contextURL are set
-				if(project.hasProperty('artifactory_user') && 
-					project.hasProperty('artifactory_password') && 
-					project.hasProperty('artifactory_contextUrl')) {
-					logger.info 'Found Artifactory properties. Applying remote repository publishing configuration.'
+				if(project.hasProperty('nexusUser') &&
+					project.hasProperty('nexusPassword') &&
+					project.hasProperty('nexusBaseUrl')) {
+					logger.info 'Found Nexus properties. Applying remote repository publishing configuration.'
 					repositories {
 						maven {
-							url "${artifactory_contextUrl}${->project.version.contains('-SNAPSHOT') ?  'libs-snapshot-local' : 'libs-release-local'}"
+							url "${nexusBaseUrl}${->project.version.contains('-SNAPSHOT') ?  'snapshots-public' : 'releases-public'}"
 							credentials {
-								username = "${artifactory_user}"
-								password = "${artifactory_password}"
+								username = "${nexusUser}"
+								password = "${nexusPassword}"
 							}
 						}
 					}
 				} else {
-					logger.info 'Not applying remote repository publishing configuration as Artifactory repository is not configured properly.'
+					logger.info 'Not applying remote repository publishing configuration as Nexus repository is not configured properly.'
 				}
 			}
 
@@ -136,8 +136,8 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 
 				// Needs to be done in afterEvaluate as release tasks aren't available before yet
 				release {
-					releaseRepositoryUrl = "${artifactory_contextUrl}/libs-release-local"
-					snapshotRepositoryUrl= "${artifactory_contextUrl}/libs-snapshot-local"
+					releaseRepositoryUrl = "${nexusBaseUrl}/releases-public"
+					snapshotRepositoryUrl= "${nexusBaseUrl}/snapshots-public"
 
 					// Configure release tasks
 					releaseTasks << build
