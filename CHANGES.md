@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.3.3
+* Updates Maven repo URL for new Nexus Maven repo
+
 #### 0.3.2
 * Increases nebula-test dependency to version 2.2.1
 
