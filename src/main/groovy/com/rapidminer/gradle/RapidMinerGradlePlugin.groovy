@@ -94,7 +94,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 					logger.info 'Found Nexus properties. Applying remote repository publishing configuration.'
 					repositories {
 						maven {
-							url "${nexusBaseUrl}${->project.version.contains('-SNAPSHOT') ?  'snapshots-public' : 'releases-public'}"
+							url "${nexusBaseUrl}${->project.version.contains('-SNAPSHOT') ?  'snapshots' : 'releases-public'}"
 							credentials {
 								username = "${nexusUser}"
 								password = "${nexusPassword}"
