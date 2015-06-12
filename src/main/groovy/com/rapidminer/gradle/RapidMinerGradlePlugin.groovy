@@ -136,8 +136,8 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 
 				// Needs to be done in afterEvaluate as release tasks aren't available before yet
 				release {
-					releaseRepositoryUrl = "${nexusBaseUrl}/releases-public"
-					snapshotRepositoryUrl= "${nexusBaseUrl}/snapshots-public"
+					releaseRepositoryUrl = "https://maven.rapidminer.com/content/repositories/releases-public"
+					snapshotRepositoryUrl= "https://maven.rapidminer.com/content/repositories/snapshots"
 
 					// Configure release tasks
 					releaseTasks << build

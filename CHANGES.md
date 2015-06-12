@@ -1,6 +1,7 @@
 ## Change Log
 
 #### 0.3.4
+* Hard-coded Maven repository for release plugin
 
 #### 0.3.3
 * Updates Maven repo URL for new Nexus Maven repo
