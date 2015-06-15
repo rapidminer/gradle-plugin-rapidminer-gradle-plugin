@@ -89,12 +89,11 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				}
 				// Only set remote Maven repository if user, password, and contextURL are set
 				if(project.hasProperty('nexusUser') &&
-					project.hasProperty('nexusPassword') &&
-					project.hasProperty('nexusBaseUrl')) {
+					project.hasProperty('nexusPassword')) {
 					logger.info 'Found Nexus properties. Applying remote repository publishing configuration.'
 					repositories {
 						maven {
-							url "${nexusBaseUrl}${->project.version.contains('-SNAPSHOT') ?  'snapshots' : 'releases-public'}"
+							url "https://maven.rapidminer.com/content/repositories/${->project.version.contains('-SNAPSHOT') ?  'snapshots' : 'releases-public'}"
 							credentials {
 								username = "${nexusUser}"
 								password = "${nexusPassword}"

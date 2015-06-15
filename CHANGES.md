@@ -1,6 +1,7 @@
 ## Change Log
 
 #### 0.3.5
+* Removed check for nexusBase URL property
 
 #### 0.3.4
 * Hard-coded Maven repository for release plugin
