@@ -1,5 +1,7 @@
 ## Change Log
 
+#### 0.3.6
+
 #### 0.3.5
 * Removed check for nexusBase URL property
 
