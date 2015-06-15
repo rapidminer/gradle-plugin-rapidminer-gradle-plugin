@@ -1,10 +1,8 @@
 plugins {
-    id 'com.rapidminer.gradle-plugin' version '0.3.2'
+    id 'com.rapidminer.gradle-plugin' version '0.3.4'
 }
 
-gradlePlugin {
-	id 'gradle-plugin'
-}
+gradlePlugin {	id 'gradle-plugin' }
 
 dependencies {
 	compile 'com.rapidminer.gradle:release:0.2.1'

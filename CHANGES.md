@@ -1,5 +1,7 @@
 ## Change Log
 
+#### 0.3.5
+
 #### 0.3.4
 * Hard-coded Maven repository for release plugin
 
