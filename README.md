@@ -4,7 +4,7 @@ It defines the correct source and target Java/Groovy compatibility, sets the plu
 
 ## How to use (requires Gradle 2.1+)
 	plugins {
-		id 'com.rapidminer.gradle-plugin' version «plugin version»
+		id 'com.rapidminer.gradle-plugin' version <plugin version>
 	}
 	
 	gradlePlugin {
@@ -20,7 +20,7 @@ It defines the correct source and target Java/Groovy compatibility, sets the plu
 - maven-publish
 - com.rapidminer.release
 - com.rapidminer.code-quality
-- com.jfrog.bintray
+- com.gradle.plugin-publish
 
 ## Added Tasks
 _Adds no tasks_

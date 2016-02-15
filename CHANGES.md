@@ -1,6 +1,9 @@
 ## Change Log
 
-#### 0.3.6
+#### 0.4.0
+* Changes default Java version to 1.8
+* Updates 'plugin-publish-plugin' to version 0.9.3
+* Updates 'com.rapidminer.code-quality' to version 0.4.0
 
 #### 0.3.5
 * Removed check for nexusBase URL property

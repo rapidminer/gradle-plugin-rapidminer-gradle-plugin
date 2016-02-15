@@ -42,8 +42,8 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			apply plugin: 'com.rapidminer.code-quality'
 			apply plugin: 'com.gradle.plugin-publish'
 
-			sourceCompatibility = JavaVersion.VERSION_1_7
-			targetCompatibility = JavaVersion.VERSION_1_7
+			sourceCompatibility = JavaVersion.VERSION_1_8
+			targetCompatibility = JavaVersion.VERSION_1_8
 
 			group 'com.rapidminer.gradle'
 			
@@ -109,7 +109,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 				compile gradleApi()
 				compile localGroovy()
 
-				testCompile('com.netflix.nebula:nebula-test:2.2.1') {
+				testCompile('com.netflix.nebula:nebula-test:3.1.0') {
 					exclude group: 'org.codehaus.groovy'
 				}
 			}
