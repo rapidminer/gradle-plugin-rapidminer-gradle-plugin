@@ -42,17 +42,17 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			apply plugin: 'com.rapidminer.code-quality'
 			apply plugin: 'com.gradle.plugin-publish'
 
-			sourceCompatibility = JavaVersion.VERSION_1_8
-			targetCompatibility = JavaVersion.VERSION_1_8
+			sourceCompatibility = JavaVersion.VERSION_1_7
+			targetCompatibility = JavaVersion.VERSION_1_7
 
 			group 'com.rapidminer.gradle'
-			
+
 			// custom tasks for creating source/javadoc jars
 			tasks.create(name:'sourcesJar', type: Jar, dependsOn: 'classes') {
 				classifier = 'sources'
 				from sourceSets.main.allSource
 			}
-		
+
 			// add source jar tasks as artifacts
 			artifacts { archives sourcesJar }
 
@@ -81,7 +81,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 						// projects configure method. Otherwise we would have
 						// to use conventionalMappings
 						artifactId = extension.id
-						
+
 						artifact sourcesJar {
 							classifier "sources"
 						}
@@ -151,7 +151,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 						}
 					}
 				}
-				
+
 			}
 		}
 	}

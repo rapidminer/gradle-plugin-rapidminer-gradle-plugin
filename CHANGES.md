@@ -1,5 +1,8 @@
 ## Change Log
 
+#### 0.4.1
+* Set default Java version back to 1.7 to avoid compatibility issues
+
 #### 0.4.0
 * Changes default Java version to 1.8
 * Updates 'plugin-publish-plugin' to version 0.9.3
@@ -38,7 +41,7 @@
 * Fixes publication referenced by bintrayUpload task
 
 #### 0.2.7
-* Adds sources jar to plugin publication 
+* Adds sources jar to plugin publication
 * Adds Bintray plugin
 
 #### 0.2.6
@@ -69,7 +72,5 @@
 #### 0.1.1
 * Fixes compile dependencies
 
-#### 0.1.0 
+#### 0.1.0
 * Extension release
-
-
