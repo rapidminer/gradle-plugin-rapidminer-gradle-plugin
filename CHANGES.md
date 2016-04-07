@@ -1,5 +1,7 @@
 ## Change Log
 
+#### 0.4.2
+
 #### 0.4.1
 * Set default Java version back to 1.7 to avoid compatibility issues
 
