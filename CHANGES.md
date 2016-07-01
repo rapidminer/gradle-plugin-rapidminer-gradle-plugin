@@ -1,6 +1,7 @@
 ## Change Log
 
 #### 0.4.2
+* Updates 'plugin-publish-plugin' to version 0.9.4
 
 #### 0.4.1
 * Set default Java version back to 1.7 to avoid compatibility issues
