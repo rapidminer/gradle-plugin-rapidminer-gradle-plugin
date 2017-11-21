@@ -1,6 +1,7 @@
 ## Change Log
 
 #### 0.4.4
+* Updates 'plugin-publish-plugin' to version 0.9.9
 
 #### 0.4.3
 * Updates 'plugin-publish-plugin' to version 0.9.7
