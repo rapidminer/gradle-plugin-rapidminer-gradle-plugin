@@ -1,6 +1,7 @@
 ## Change Log
 
 #### 0.4.5
+* Reference version 0.4.4 of the code-quality plugin
 
 #### 0.4.4
 * Updates 'plugin-publish-plugin' to version 0.9.9
