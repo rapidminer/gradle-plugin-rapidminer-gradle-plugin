@@ -118,7 +118,7 @@ class RapidMinerGradlePlugin implements Plugin<Project> {
 			afterEvaluate {
 				pluginBundle {
 					website = 'https://www.rapidminer.com'
-					vcsUrl = "https://github.com/gradle/gradle-plugin-rapidminer-${extension.id}"
+					vcsUrl = "https://github.com/rapidminer/gradle-plugin-rapidminer-${extension.id}"
 					tags = ['rapidminer']
 					description = readChangesDescription(project)
 

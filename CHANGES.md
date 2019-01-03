@@ -1,6 +1,7 @@
 ## Change Log
 
 #### 0.4.6
+* Fixed a bug in the vcs URL.
 
 #### 0.4.5
 * Reference version 0.4.4 of the code-quality plugin
